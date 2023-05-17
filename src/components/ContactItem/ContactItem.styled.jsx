@@ -30,4 +30,7 @@ export const Button = styled.button`
   :active {
     background-color: #690000;
   }
+  :disabled {
+    background-color: #888888;
+  }
 `;

@@ -1,11 +1,10 @@
-import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contacts/operations';
+import { useDeleteContactMutation } from 'redux/contacts/contactsSlice';
 import { Button, Item, Thumb } from './ContactItem.styled';
 import PropTypes from 'prop-types';
 import { toast } from 'react-hot-toast';
 
 export const ListItem = ({ id, name, number }) => {
-  const dispatch = useDispatch();
+  const [deleteContact, { isLoading }] = useDeleteContactMutation();
 
   return (
     <Item>
@@ -16,8 +15,9 @@ export const ListItem = ({ id, name, number }) => {
         <p>{number}</p>
         <Button
           type="button"
+          disabled={isLoading}
           onClick={() => {
-            dispatch(deleteContact(id));
+            deleteContact(id);
             toast.success(`${name} is deleted`);
           }}
         >
